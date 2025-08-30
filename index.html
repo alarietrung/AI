@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Xây Dựng Ứng Dụng AI Y Tế</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Calm Harmony (Light Gray, Muted Blue, Gentle Green Accent) -->
+    <!-- Application Structure Plan: The application is structured as an interactive vertical timeline/accordion. Each of the 6 steps from the source document is a collapsible section. This design transforms a static text guide into an engaging, task-oriented workflow. It allows users to focus on one step at a time while easily tracking their overall progress, which is more effective for a tutorial than a traditional data dashboard. The primary interactions are expanding/collapsing steps and copying code snippets, directly supporting the user's goal of building the app. -->
+    <!-- Visualization & Content Choices: The source material is a procedural guide, not data. Therefore, instead of charts, the visualization focuses on the process itself. Step 1 (Environment): Goal: Guide -> Presentation: Accordion section with icons, text, and copyable code blocks. Interaction: Expand/collapse, copy code. Justification: Breaks the setup into clear, actionable items. Step 3 (Source Code): Goal: Instruct -> Presentation: Informational text with file icons. Justification: Clearly explains the necessary files without cluttering the UI with full code. Step 6 (Usage): Goal: Inform -> Presentation: Two-column layout with mock UI elements. Justification: Visually demonstrates the final application's functionality. All code snippets have a one-click copy feature to reduce user error and streamline the process. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        .step-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .step.open .step-content {
+            max-height: 1000px; /* Adjust as needed */
+        }
+        .step-header {
+            cursor: pointer;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #4A5568;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        pre:hover .copy-btn {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8">
+        
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-slate-900">Xây Dựng Ứng Dụng AI Dự Đoán Bệnh</h1>
+            <p class="mt-4 text-lg text-slate-600">Một lộ trình tương tác để bạn xây dựng ứng dụng của riêng mình từ đầu đến cuối.</p>
+        </header>
+
+        <div class="space-y-6" id="steps-container">
+
+            <!-- Step 1 -->
+            <div class="step bg-white rounded-lg shadow-md transition-all duration-300" id="step-1">
+                <div class="step-header flex justify-between items-center p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-sky-100 text-sky-600 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">1</div>
+                        <h2 class="ml-4 text-xl font-semibold text-slate-900">Chuẩn bị Môi trường Lập trình</h2>
+                    </div>
+                    <span class="transform transition-transform duration-300 text-sky-600">▼</span>
+                </div>
+                <div class="step-content px-6 pb-6 border-t border-slate-200">
+                    <p class="mt-4 text-slate-600">Nền tảng vững chắc là bước đầu tiên. Chúng ta sẽ thiết lập một không gian làm việc sạch sẽ, có tổ chức và cài đặt các công cụ cần thiết.</p>
+                    <div class="mt-6 space-y-4">
+                        <div class="p-4 bg-slate-50 rounded-lg">
+                            <h3 class="font-semibold">1. Cài đặt Python</h3>
+                            <p class="text-sm text-slate-500">Đảm bảo bạn có Python 3.11+. Tải về từ <a href="https://python.org" target="_blank" class="text-sky-500 hover:underline">python.org</a>.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg">
+                            <h3 class="font-semibold">2. Tạo Thư mục Dự án</h3>
+                            <p class="text-sm text-slate-500 mb-2">Tạo và di chuyển vào thư mục dự án của bạn.</p>
+                            <pre class="bg-gray-800 text-white p-4 rounded-md relative text-sm"><code class="language-bash">mkdir AI_Health_App
+cd AI_Health_App</code><button class="copy-btn">Copy</button></pre>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg">
+                            <h3 class="font-semibold">3. Tạo & Kích hoạt Môi trường ảo</h3>
+                            <p class="text-sm text-slate-500 mb-2">Cách tốt nhất để quản lý các thư viện một cách độc lập.</p>
+                            <p class="text-xs text-slate-500 font-medium mb-1">Lệnh cho Windows:</p>
+                            <pre class="bg-gray-800 text-white p-4 rounded-md relative text-sm"><code class="language-bash">python -m venv venv
+.\\venv\\Scripts\\activate</code><button class="copy-btn">Copy</button></pre>
+                            <p class="text-xs text-slate-500 font-medium mt-3 mb-1">Lệnh cho macOS/Linux:</p>
+                             <pre class="bg-gray-800 text-white p-4 rounded-md relative text-sm"><code class="language-bash">python3 -m venv venv
+source venv/bin/activate</code><button class="copy-btn">Copy</button></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step bg-white rounded-lg shadow-md transition-all duration-300" id="step-2">
+                <div class="step-header flex justify-between items-center p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-sky-100 text-sky-600 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">2</div>
+                        <h2 class="ml-4 text-xl font-semibold text-slate-900">Cài đặt các Thư viện cần thiết</h2>
+                    </div>
+                     <span class="transform transition-transform duration-300 text-sky-600">▼</span>
+                </div>
+                <div class="step-content px-6 pb-6 border-t border-slate-200">
+                    <p class="mt-4 text-slate-600">Với môi trường ảo đã được kích hoạt, hãy cài đặt tất cả các "viên gạch" cần thiết để xây dựng ứng dụng của chúng ta bằng một lệnh duy nhất.</p>
+                     <div class="mt-6">
+                        <pre class="bg-gray-800 text-white p-4 rounded-md relative text-sm"><code class="language-bash">pip install streamlit pandas numpy scikit-learn xgboost joblib</code><button class="copy-btn">Copy</button></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step bg-white rounded-lg shadow-md transition-all duration-300" id="step-3">
+                <div class="step-header flex justify-between items-center p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-sky-100 text-sky-600 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">3</div>
+                        <h2 class="ml-4 text-xl font-semibold text-slate-900">Tạo các Tệp Mã nguồn</h2>
+                    </div>
+                     <span class="transform transition-transform duration-300 text-sky-600">▼</span>
+                </div>
+                <div class="step-content px-6 pb-6 border-t border-slate-200">
+                    <p class="mt-4 text-slate-600">Dự án của chúng ta sẽ bao gồm hai tệp Python chính. Hãy tạo chúng trong thư mục `AI_Health_App`.</p>
+                     <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                            <h3 class="font-semibold flex items-center">📄 `train_model.py`</h3>
+                            <p class="text-sm text-slate-500 mt-2">Tệp này chịu trách nhiệm tạo dữ liệu, huấn luyện mô hình AI và lưu lại "bộ não" đã được huấn luyện.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                            <h3 class="font-semibold flex items-center">🚀 `app.py`</h3>
+                            <p class="text-sm text-slate-500 mt-2">Tệp này sẽ tạo ra giao diện web tương tác, tải mô hình AI, và thực hiện dự đoán dựa trên dữ liệu người dùng nhập vào.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step bg-white rounded-lg shadow-md transition-all duration-300" id="step-4">
+                <div class="step-header flex justify-between items-center p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-sky-100 text-sky-600 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">4</div>
+                        <h2 class="ml-4 text-xl font-semibold text-slate-900">Huấn luyện Mô hình Học máy</h2>
+                    </div>
+                     <span class="transform transition-transform duration-300 text-sky-600">▼</span>
+                </div>
+                <div class="step-content px-6 pb-6 border-t border-slate-200">
+                    <p class="mt-4 text-slate-600">Đây là lúc chúng ta "dạy" cho máy tính cách nhận diện các mẫu bệnh. Chạy tệp huấn luyện từ terminal của bạn.</p>
+                    <div class="mt-6">
+                        <pre class="bg-gray-800 text-white p-4 rounded-md relative text-sm"><code class="language-bash">python train_model.py</code><button class="copy-btn">Copy</button></pre>
+                        <div class="mt-4 p-4 bg-emerald-50 text-emerald-800 rounded-lg text-sm">
+                            <p><strong>Kết quả mong đợi:</strong> Một thư mục mới tên là `model` sẽ được tạo ra, chứa tệp `disease_predictor.pkl`. Đây chính là mô hình AI của bạn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step bg-white rounded-lg shadow-md transition-all duration-300" id="step-5">
+                <div class="step-header flex justify-between items-center p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-sky-100 text-sky-600 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">5</div>
+                        <h2 class="ml-4 text-xl font-semibold text-slate-900">Chạy Ứng dụng Web Streamlit</h2>
+                    </div>
+                     <span class="transform transition-transform duration-300 text-sky-600">▼</span>
+                </div>
+                <div class="step-content px-6 pb-6 border-t border-slate-200">
+                    <p class="mt-4 text-slate-600">Mô hình đã sẵn sàng, giờ là lúc khởi chạy giao diện web để mọi người có thể tương tác.</p>
+                    <div class="mt-6">
+                        <pre class="bg-gray-800 text-white p-4 rounded-md relative text-sm"><code class="language-bash">streamlit run app.py</code><button class="copy-btn">Copy</button></pre>
+                         <div class="mt-4 p-4 bg-emerald-50 text-emerald-800 rounded-lg text-sm">
+                            <p><strong>Kết quả mong đợi:</strong> Trình duyệt của bạn sẽ tự động mở một tab mới, hiển thị ứng dụng chẩn đoán y tế đang hoạt động.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="step bg-white rounded-lg shadow-md transition-all duration-300" id="step-6">
+                <div class="step-header flex justify-between items-center p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-sky-100 text-sky-600 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">6</div>
+                        <h2 class="ml-4 text-xl font-semibold text-slate-900">Sử dụng Ứng dụng</h2>
+                    </div>
+                     <span class="transform transition-transform duration-300 text-sky-600">▼</span>
+                </div>
+                <div class="step-content px-6 pb-6 border-t border-slate-200">
+                     <p class="mt-4 text-slate-600">Chúc mừng! Ứng dụng của bạn đã hoàn tất. Đây là cách bạn có thể tương tác với nó.</p>
+                     <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-semibold text-slate-800">Lựa chọn 1: Nhập liệu thủ công</h3>
+                            <p class="text-sm text-slate-500 mt-2">Điền thông tin vào biểu mẫu, chọn triệu chứng và nhấn nút dự đoán để nhận kết quả ngay lập tức.</p>
+                             <div class="mt-4 p-4 border border-slate-200 rounded-lg bg-slate-50 space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <label class="text-sm font-medium">Age</label>
+                                    <input type="text" value="30" class="w-16 text-center text-sm p-1 rounded border bg-white" disabled>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <label class="text-sm font-medium">Gender</label>
+                                    <input type="text" value="Male" class="w-16 text-center text-sm p-1 rounded border bg-white" disabled>
+                                </div>
+                                 <button class="w-full bg-sky-500 text-white py-2 rounded-lg font-semibold">Predict Disease</button>
+                             </div>
+                        </div>
+                        <div>
+                             <h3 class="font-semibold text-slate-800">Lựa chọn 2: Tải tệp lên</h3>
+                             <p class="text-sm text-slate-500 mt-2">Tải lên một tệp CSV hoặc Excel chứa dữ liệu của nhiều bệnh nhân để xử lý hàng loạt.</p>
+                             <div class="mt-4 p-4 border border-slate-200 rounded-lg bg-slate-50">
+                                <div class="flex flex-col items-center justify-center border-2 border-dashed border-slate-300 rounded-lg p-8">
+                                    <span class="text-3xl">📂</span>
+                                    <p class="text-sm font-semibold mt-2">Browse files</p>
+                                    <p class="text-xs text-slate-400 mt-1">Hỗ trợ CSV, XLSX</p>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center mt-12">
+            <p class="text-slate-500">Đã hoàn thành! Bạn đã xây dựng thành công một ứng dụng AI y tế hoàn chỉnh.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const steps = document.querySelectorAll('.step');
+            const copyButtons = document.querySelectorAll('.copy-btn');
+
+            steps.forEach(step => {
+                const header = step.querySelector('.step-header');
+                const arrow = header.querySelector('span');
+
+                header.addEventListener('click', () => {
+                    const wasOpen = step.classList.contains('open');
+                    
+                    steps.forEach(s => {
+                        s.classList.remove('open');
+                        s.querySelector('.step-header span').style.transform = 'rotate(0deg)';
+                    });
+
+                    if (!wasOpen) {
+                        step.classList.add('open');
+                        arrow.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            copyButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const code = button.previousElementSibling.innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        button.textContent = 'Copied!';
+                        setTimeout(() => {
+                            button.textContent = 'Copy';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                    });
+                });
+            });
+            
+            // Auto-open the first step by default
+            const firstStep = document.getElementById('step-1');
+            if (firstStep) {
+                firstStep.classList.add('open');
+                firstStep.querySelector('.step-header span').style.transform = 'rotate(180deg)';
+            }
+        });
+    </script>
+
+</body>
+</html>
